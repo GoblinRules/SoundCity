@@ -1,0 +1,58 @@
+SoundCity invokes OpenSCQ30 as a separate executable.
+
+OpenSCQ30 v2.13.0
+Copyright Kyle Scheuing and the OpenSCQ30 contributors.
+License: GNU GPL version 3; see tools/OpenSCQ30-LICENSE.txt in builds.
+Exact corresponding source: https://github.com/Oppzippy/OpenSCQ30/tree/v2.13.0
+Source archive: https://github.com/Oppzippy/OpenSCQ30/archive/refs/tags/v2.13.0.zip
+Upstream: https://github.com/Oppzippy/OpenSCQ30
+Binary SHA-256: c4b24b7e59f56bbcff0a240830a613cd51bee2822808d5b6075c80087fe04bf0
+
+Ugreen research references (no command implementation copied):
+https://github.com/tzy3454u/ugreen-headphone-control (HiTune Max5c)
+https://github.com/tung1883/ugreen-desktop-gui (Studio Pro)
+These are different models from WS213 and HP208. SoundCity does not use their
+write commands for unverified devices.
+
+Additional research references:
+https://github.com/dustincorder/ugreenapp
+https://github.com/nx-d1frnt/ugreenapp
+https://github.com/ilyamen/ugreenapp
+https://github.com/lucasrc97/ugreenapp-windows
+
+Studio Max5s HP208 interoperability:
+https://us.ugreen.com/pages/ugreen-app
+Packet layout, CRC, handshake and exact-model capability/command mappings
+were identified by static inspection of UGREEN Audio 2.7.0 (945), with live
+encrypted reads verified on HP208 firmware 0.1.5. The C# implementation is
+original. No vendor app binary, artwork or decompiled source is distributed.
+Research tooling: https://github.com/P1sec/hermes-dec (not distributed).
+
+Parrot Zik 3 interoperability references:
+https://github.com/AeonLucid/Parroter
+  AeonLucid and contributors; GPL-3.0. Revision:
+  6bc4bbdbb00aa7a420c1ea0890bc99ac22a18d26
+https://github.com/m0sia/pyParrotZik
+  Dmitry Moiseev and contributors; GPL-2.0-or-later per setup.py. Revision:
+  3f8786741afa17c30e23186c465fe870b2de9efe
+https://github.com/kradhub/zik2ctl
+  Copyright 2015 Aurelien Zanelli; LGPL-3.0-or-later per src/zikmessage.c;
+  revision 1be3290fb866b16c4dc2abea10d50e3137bcbfff.
+https://github.com/picaso/parrot-zik-status (XML response examples)
+SoundCity's C# implementation is original and distributed under its GPL-3.0-only
+license. These sources were consulted for RFCOMM service identity, frame layout,
+session handshake, command paths and value mappings. No upstream binaries,
+artwork or vendor firmware are distributed. New-device tests are synthetic.
+
+Additional references (no code or audio correction data distributed):
+https://gist.github.com/undiabler/e54f74c554d1bcc00404ea2ccfb2d906
+  Linux audio routing only; not a vendor settings protocol.
+https://github.com/jaakkopasanen/AutoEq/tree/master/results/oratory1990/in-ear/Beats%20Studio%20Buds
+  Studio Buds is not Solo Buds. Its filters are not used for Solo Buds.
+https://support.apple.com/109525 (AirPods Pro 3 identification)
+https://github.com/arctumn/ntpods/tree/main/windows
+  Revision 188e45df20259b616ce155be812086259d1a2488; Windows AAP transport
+  research only. No NTPods driver, daemon or Apple command implementation bundled.
+
+Product names belong to their respective owners. SoundCity is independent
+of Soundcore, Anker, Ugreen, Parrot, Beats and Apple. Vendor artwork is not bundled.

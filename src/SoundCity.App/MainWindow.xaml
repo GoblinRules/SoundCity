@@ -1,0 +1,106 @@
+<Window x:Class="SoundCity.App.MainWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+ Title="SoundCity" Style="{StaticResource DarkWindow}" Icon="Assets/SoundCity.ico"
+ Width="1250" Height="880" MinWidth="1000" MinHeight="700" WindowStartupLocation="CenterScreen">
+ <shell:WindowChrome.WindowChrome><shell:WindowChrome CaptionHeight="46" ResizeBorderThickness="6" GlassFrameThickness="0" CornerRadius="0" UseAeroCaptionButtons="False"/></shell:WindowChrome.WindowChrome>
+ <Border Background="{StaticResource Canvas}" BorderBrush="{StaticResource Stroke}" BorderThickness="1">
+ <Grid>
+  <Grid.ColumnDefinitions><ColumnDefinition Width="268"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+  <Border Background="{StaticResource Sidebar}" BorderBrush="{StaticResource Stroke}" BorderThickness="0,0,1,0">
+   <Grid Margin="20,0,20,23">
+    <Grid.RowDefinitions><RowDefinition Height="92"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+     <Image Source="{StaticResource SoundCityIcon}" Width="44" Height="44" Margin="0,0,11,0" AutomationProperties.Name="SoundCity logo"/>
+     <StackPanel VerticalAlignment="Center"><TextBlock Text="SoundCity" FontSize="23" FontWeight="SemiBold"/><TextBlock Text="YOUR SOUND. YOUR SPACE." FontSize="8" Foreground="{StaticResource Subtle}" Margin="1,3,0,0"/></StackPanel>
+    </StackPanel>
+    <DockPanel Grid.Row="1" Margin="3,16,0,16">
+     <Button x:Name="ScanButton" DockPanel.Dock="Right" Content="&#xE72C;" FontFamily="Segoe MDL2 Assets" FontSize="13" Style="{StaticResource Ghost}" Padding="9" MinHeight="30" ToolTip="Refresh devices (Ctrl+D)" AutomationProperties.Name="Refresh devices" Click="ScanClick"/>
+     <TextBlock Text="YOUR DEVICES" Style="{StaticResource Eyebrow}" VerticalAlignment="Center"/>
+    </DockPanel>
+    <ListBox x:Name="DevicesList" Grid.Row="2" Background="Transparent" BorderThickness="0" Foreground="{StaticResource Ink}" SelectionChanged="DeviceChanged" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+     <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem">
+      <Setter Property="Padding" Value="15,16"/><Setter Property="Margin" Value="0,0,0,10"/><Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+      <Setter Property="Foreground" Value="{StaticResource Ink}"/><Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
+       <Border x:Name="Frame" Background="Transparent" CornerRadius="10" BorderThickness="1" BorderBrush="Transparent" Padding="{TemplateBinding Padding}"><ContentPresenter/></Border>
+       <ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Frame" Property="Background" Value="{StaticResource Surface}"/></Trigger><Trigger Property="IsSelected" Value="True"><Setter TargetName="Frame" Property="Background" Value="{StaticResource AccentSoft}"/><Setter TargetName="Frame" Property="BorderBrush" Value="#66432D"/></Trigger><Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="Frame" Property="BorderBrush" Value="{StaticResource Accent}"/></Trigger></ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+     </Style></ListBox.ItemContainerStyle>
+     <ListBox.ItemTemplate><DataTemplate>
+      <StackPanel><TextBlock Text="{Binding Profile.Brand}" Foreground="{StaticResource Subtle}" FontSize="10" Margin="0,0,0,5"/><TextBlock Text="{Binding Profile.Name}" FontWeight="SemiBold" FontSize="15"/>
+       <StackPanel Orientation="Horizontal" Margin="0,10,0,0"><Ellipse Width="5" Height="5" Margin="0,0,7,0"><Ellipse.Style><Style TargetType="Ellipse"><Setter Property="Fill" Value="#657083"/><Style.Triggers><DataTrigger Binding="{Binding Connected}" Value="True"><Setter Property="Fill" Value="{StaticResource Accent}"/></DataTrigger></Style.Triggers></Style></Ellipse.Style></Ellipse><TextBlock Text="{Binding ConnectionLabel}" FontSize="10" Foreground="{StaticResource Muted}"/></StackPanel>
+      </StackPanel>
+     </DataTemplate></ListBox.ItemTemplate>
+    </ListBox>
+    <StackPanel Grid.Row="3">
+     <Border Height="1" Background="{StaticResource Stroke}" Margin="0,18,0,13"/>
+     <Button x:Name="IdentifyButton" Content="Identify headphones" Click="IdentifyClick" Style="{StaticResource Ghost}" HorizontalContentAlignment="Left"/>
+     <Button Content="Bluetooth settings  ↗" Click="BluetoothClick" Style="{StaticResource Ghost}" HorizontalContentAlignment="Left"/>
+     <Button Content="Keep in tray" Click="TrayClick" Style="{StaticResource Ghost}"/>
+     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,18,0,0"><Ellipse Fill="{StaticResource Accent}" Width="5" Height="5" Margin="0,0,7,0"/><TextBlock Text="LOCAL CONTROL · WINDOWS" FontSize="9" Foreground="{StaticResource Subtle}"/></StackPanel>
+    </StackPanel>
+   </Grid>
+  </Border>
+  <Grid Grid.Column="1">
+   <Grid.RowDefinitions><RowDefinition Height="46"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+   <DockPanel LastChildFill="True" Margin="30,0,6,0">
+    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+     <Button Content="&#xE921;" Style="{StaticResource CaptionButton}" Click="MinimizeClick" AutomationProperties.Name="Minimize"/>
+     <Button Content="&#xE922;" Style="{StaticResource CaptionButton}" Click="MaximizeClick" AutomationProperties.Name="Maximize or restore"/>
+     <Button Content="&#xE8BB;" Style="{StaticResource CaptionButton}" Click="CloseClick" AutomationProperties.Name="Close"/>
+    </StackPanel>
+    <TextBlock Text="LISTENING ROOM" Style="{StaticResource Eyebrow}" VerticalAlignment="Center"/>
+   </DockPanel>
+   <Grid Grid.Row="1" Margin="30,16,30,23">
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <StackPanel>
+     <Border x:Name="DemoBanner" Visibility="Collapsed" Background="{StaticResource AccentSoft}" CornerRadius="6" Padding="12,8" Margin="0,0,0,12"><TextBlock Text="DEMO SESSION · SIMULATED HEADPHONES" Foreground="{StaticResource Accent}" FontWeight="SemiBold" FontSize="10"/></Border>
+     <Border CornerRadius="15" BorderBrush="{StaticResource Stroke}" BorderThickness="1" Padding="25,23">
+      <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#1A202C" Offset="0"/><GradientStop Color="#131820" Offset="0.6"/><GradientStop Color="#282019" Offset="1"/></LinearGradientBrush></Border.Background>
+      <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="105"/></Grid.ColumnDefinitions>
+       <StackPanel VerticalAlignment="Center">
+        <TextBlock x:Name="ConnectionBadge" Text="MAKE YOURSELF AT HOME" Foreground="{StaticResource Accent}" FontWeight="SemiBold" FontSize="10"/>
+        <TextBlock x:Name="DeviceTitle" Text="Your listening room." FontSize="32" FontWeight="SemiBold" Margin="0,8,0,7"/>
+        <TextBlock x:Name="DeviceSubtitle" Text="Finding your paired headphones…" Foreground="{StaticResource Muted}" FontSize="12"/>
+        <TextBlock x:Name="BatterySummary" Foreground="{StaticResource Accent}" FontWeight="SemiBold" FontSize="12" Margin="0,10,0,0" Visibility="Collapsed"/>
+       </StackPanel>
+       <Image Grid.Column="1" Source="{StaticResource SoundCityMark}" Width="92" Height="92" Margin="13,0,0,0" Opacity="0.85"/>
+      </Grid>
+     </Border>
+    </StackPanel>
+    <StackPanel Grid.Row="1" Margin="0,20,0,16">
+     <CheckBox x:Name="P3Confirmation" Content="Confirm Life P3 · A3939 (check the case or Soundcore app)" Visibility="Collapsed" Checked="ConfirmationChanged" Unchecked="ConfirmationChanged" Margin="0,0,0,15"/>
+     <DockPanel>
+      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+       <Button x:Name="InspectButton" Content="Connection details" Style="{StaticResource Ghost}" Click="InspectClick" IsEnabled="False" Margin="0,0,7,0"/>
+       <Button x:Name="ReadButton" Content="Load controls" Style="{StaticResource Primary}" Click="ReadClick" IsEnabled="False"/>
+      </StackPanel>
+      <TextBlock Text="Make it sound like you." FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center"/>
+     </DockPanel>
+     <Grid x:Name="FilterBar" Visibility="Collapsed" Margin="0,16,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <ComboBox x:Name="CategoryPicker" SelectionChanged="CategoryChanged" AutomationProperties.Name="Control category"/>
+      <TextBox x:Name="SearchBox" Grid.Column="1" Margin="12,0,0,0" TextChanged="SearchChanged" ToolTip="Filter controls by name" AutomationProperties.Name="Search controls"/>
+      <Button Grid.Column="2" Content="Equaliser" Click="EqualizerClick" Margin="12,0,0,0"/>
+      <Button Grid.Column="3" Content="Volume boost" Click="BoostClick" Style="{StaticResource Ghost}" Margin="5,0,0,0"/>
+     </Grid>
+    </StackPanel>
+    <ScrollViewer x:Name="ControlsScroll" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+     <StackPanel Margin="0,0,10,0">
+      <StackPanel x:Name="AudioPanel"/>
+      <StackPanel x:Name="ControlsPanel"/>
+     </StackPanel>
+    </ScrollViewer>
+    <Border Grid.Row="3" BorderBrush="{StaticResource Stroke}" BorderThickness="0,1,0,0" Padding="0,14,0,0" Margin="0,15,0,0">
+     <DockPanel>
+      <Button x:Name="ExportButton" Content="Export diagnostics" Style="{StaticResource Ghost}" DockPanel.Dock="Right" Click="ExportClick" IsEnabled="False" FontSize="10" Padding="10,6" MinHeight="28" Margin="12,0,0,0"/>
+      <Button x:Name="CancelButton" Content="Cancel" Visibility="Collapsed" DockPanel.Dock="Right" Click="CancelClick" Margin="12,0,0,0" Padding="10,5" MinHeight="28"/>
+      <StackPanel VerticalAlignment="Center"><ProgressBar x:Name="Progress" Height="2" Foreground="{StaticResource Accent}" Background="{StaticResource Stroke}" BorderThickness="0" IsIndeterminate="True" Visibility="Collapsed" Margin="0,0,0,7"/><TextBlock x:Name="Status" Text="Ready" Foreground="{StaticResource Muted}" FontSize="11"/></StackPanel>
+     </DockPanel>
+    </Border>
+   </Grid>
+  </Grid>
+ </Grid>
+ </Border>
+</Window>

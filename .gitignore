@@ -1,0 +1,22 @@
+**/bin/
+**/obj/
+.vs/
+tools/openscq30/
+artifacts/
+*.user
+
+# Local credentials, state and diagnostics must not be published.
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.pem
+*.key
+*.log
+*.sqlite*
+*.db
+*.db-shm
+*.db-wal
+diagnostics/
+captures/
