@@ -93,8 +93,8 @@ $word = New-Object Windows.Media.FormattedText('SoundCity', $culture, ([Windows.
 $wordGeometry = $word.BuildGeometry((New-Object Windows.Point(350, 66)))
 $tag = New-Object Windows.Media.FormattedText('YOUR SOUND. YOUR SPACE.', $culture, ([Windows.FlowDirection]::LeftToRight), (New-Object Windows.Media.Typeface('Segoe UI')), 23, ([Windows.Media.Brushes]::White), 1.0)
 $tagGeometry = $tag.BuildGeometry((New-Object Windows.Point(357, 207)))
-$wordPath = $wordGeometry.ToString($culture) -replace '^F[01]\s*', ''
-$tagPath = $tagGeometry.ToString($culture) -replace '^F[01]\s*', ''
+$wordPath = $wordGeometry.GetFlattenedPathGeometry().ToString($culture) -replace '^F[01]\s*', ''
+$tagPath = $tagGeometry.GetFlattenedPathGeometry().ToString($culture) -replace '^F[01]\s*', ''
 $lockup = New-Object Windows.Media.DrawingGroup
 $lockup.Children.Add((New-Object Windows.Media.GeometryDrawing(([Windows.Media.BrushConverter]::new().ConvertFromString('#090B10')), $null, (New-Object Windows.Media.RectangleGeometry((New-Object Windows.Rect(0,0,1200,320)))))))
 $scaledIcon = $icon.Drawing.Clone()
