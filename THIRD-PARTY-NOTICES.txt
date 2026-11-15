@@ -1,5 +1,18 @@
 SoundCity invokes OpenSCQ30 as a separate executable.
 
+Self-contained Windows builds include Microsoft .NET 10 and Windows Desktop
+runtime components, plus Microsoft Windows SDK / C#/WinRT support libraries.
+Copyright Microsoft and contributors. See licenses/DOTNET-LICENSE.txt and
+licenses/DOTNET-THIRD-PARTY-NOTICES.txt in published builds for redistribution
+terms and third-party notices. Runtime and support-library source references:
+https://github.com/dotnet/runtime
+https://github.com/dotnet/wpf
+https://github.com/dotnet/winforms
+https://github.com/microsoft/CsWinRT
+
+The Windows installer is built with Inno Setup (Jordan Russell, Martijn Laan
+and contributors): https://jrsoftware.org/isinfo.php
+
 OpenSCQ30 v2.13.0
 Copyright Kyle Scheuing and the OpenSCQ30 contributors.
 License: GNU GPL version 3; see tools/OpenSCQ30-LICENSE.txt in builds.

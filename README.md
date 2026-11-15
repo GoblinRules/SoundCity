@@ -4,14 +4,18 @@ A local Windows desktop controller for Soundcore, UGREEN, Parrot, Beats and Appl
 
 ## Run
 
-On this checkout, run `artifacts/SoundCity/SoundCity.exe` after a published build. It includes the .NET runtime; no installer or administrator access is needed. Supports x64 Windows 10 version 2004 or newer, and Windows 11.
+Download **SoundCity-0.1.0-Setup-x64.exe** from the [latest GitHub release](https://github.com/GoblinRules/SoundCity/releases/latest). It installs for your Windows account, adds a Start menu shortcut and offers an optional desktop shortcut. Uninstall through Windows Settings → Apps. Your saved profiles and Equalizer APO configuration remain in place when you uninstall.
 
-To build from source, install the .NET 9 SDK and run from PowerShell:
+The release also includes a portable ZIP: extract it to its own folder and open `SoundCity.exe`. Both downloads include the .NET 10 runtime and need no separate .NET installation or administrator access. Supports x64 Windows 10 version 2004 or newer, and Windows 11. The first release is not code-signed; Windows may display an unknown-publisher or SmartScreen warning. SHA-256 checksums are included with the downloads.
+
+To build from source, install the .NET 10 SDK and run from PowerShell:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Build.ps1 -Publish
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Start-SoundCity.ps1
 ```
+
+The published app is written to `artifacts/SoundCity/`. See [release packaging](docs/RELEASING.md) to build the installer and portable archive.
 
 The build downloads OpenSCQ30 v2.13.0 from its official release and verifies a pinned SHA-256. A published build also includes its license and source archive. Internet access is needed for setup; normal headphone control is local.
 
